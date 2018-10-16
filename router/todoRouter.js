@@ -1,5 +1,6 @@
 let router = require("express").Router();
 let todoService = require("../service/todoService");
+let responseUtil = require("../utils/responseUtil");
 
 /**
  * 添加数据
@@ -12,11 +13,9 @@ router.post("/", async (request, response) => {
 
     let result = await todoService.addTodo(body);
 
-    response.send({
-        code: 1,
-        msg: "操作成功",
-        data: result
-    })
+    // 写出成功的响应
+    responseUtil.success(response, result);
+
 })
 /**
  * 根据ID删除数据
@@ -30,10 +29,9 @@ router.delete("/:id", async (request, response) => {
 
     await todoService.deleteTodo(id);
 
-    response.send({
-        code: 1,
-        msg: "操作成功"
-    })
+    // 写出成功的响应
+    responseUtil.success(response);
+
 })
 
 /**
@@ -49,10 +47,8 @@ router.put("/:id", async (request, response) => {
     let body = request.body;
 
     await todoService.updateTodo(id, body);
-    response.send({
-        code: 1,
-        msg: "操作成功"
-    })
+    // 写出成功的响应
+    responseUtil.success(response);
 
 })
 
@@ -61,11 +57,9 @@ router.put("/:id", async (request, response) => {
 router.get("/", async (request, response) => {
 
     let result = await todoService.findAll();
-    response.send({
-        code: 1,
-        msg: "操作成功",
-        data: result
-    })
+
+    // 写出成功的响应
+    responseUtil.success(response, result);
 
 })
 

@@ -4,6 +4,8 @@ require('express-async-errors');
 require("./db");
 let config = require("./config");
 let express = require("express");
+let responseUtil = require("./utils/responseUtil");
+
 // 处理日志
 let morgan = require("morgan");
 let todoRouter = require("./router/todoRouter");
@@ -16,11 +18,10 @@ app.use(express.json())
 app.use("/todo", todoRouter);
 // 处理全局异常的中间件
 app.use((err, request, response, next) => {
-    response.send({
-        code: -1,
-        msg: "操作失败",
-        data: err.toString()
-    })
+
+    // 写出失败的响应
+    responseUtil.fail(response, err)
+
 })
 
 app.listen(config.PORT)
