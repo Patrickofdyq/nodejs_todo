@@ -1,6 +1,5 @@
 let Todo = require("../model/todo");
 
-// {content:今天去烫头}
 /**
  * 添加数据
  * @param todo : 要添加的数据,格式为 {content:今天去烫头}
@@ -37,7 +36,6 @@ async function deleteTodo(id) {
         throw Error(`删除ID为${id}的数据发生错误`)
     }
 
-    return result;
 }
 
 // 查询对应ID的数据,是否存在
